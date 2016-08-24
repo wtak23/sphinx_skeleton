@@ -164,6 +164,60 @@
 </li>
 </ul>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Minor change made in Sphinx source code <code class="docutils literal"><span class="pre">generate.py</span></code></p>
+<p>(located at <code class="docutils literal"><span class="pre">$HOME/.local/lib/python2.7/site-packages/sphinx/ext/autosummary/generate.py</span></code>)</p>
+<div class="last highlight-udiff"><div class="highlight"><pre><span></span><span class="gd">--- generate.py</span>
+<span class="gi">+++ generate_mod.py</span>
+<span class="gu">@@ -34,6 +34,7 @@</span>
+ from sphinx.jinja2glue import BuiltinTemplateLoader
+ from sphinx.util.osutil import ensuredir
+ from sphinx.util.inspect import safe_getattr
+<span class="gi">+from inspect import ismethod, isclass, isfunction</span>
+ 
+ # Add documenters to AutoDirective registry
+ from sphinx.ext.autodoc import add_documenter, \
+<span class="gu">@@ -153,16 +154,32 @@</span>
+                 except TemplateNotFound:
+                     template = template_env.get_template(&#39;autosummary/base.rst&#39;)
+ 
+<span class="gd">-            def get_members(obj, typ, include_public=[]):</span>
+<span class="gi">+            def get_members(obj, typ, include_public=[], imported=False):</span>
+                 items = []
+                 for name in dir(obj):
+                     try:
+<span class="gd">-                        documenter = get_documenter(safe_getattr(obj, name),</span>
+<span class="gd">-                                                    obj)</span>
+<span class="gi">+                        obj_name = safe_getattr(obj, name)</span>
+<span class="gi">+                        documenter = get_documenter(obj_name, obj)</span>
+                     except AttributeError:
+                         continue
+                     if documenter.objtype == typ:
+<span class="gd">-                        items.append(name)</span>
+<span class="gi">+                        try:</span>
+<span class="gi">+                            if isclass(obj):</span>
+<span class="gi">+                                cond = True</span>
+<span class="gi">+                            elif isclass(obj_name) or isfunction(obj_name):</span>
+<span class="gi">+                                if obj_name.__module__.split(&#39;.&#39;)[0] == obj.__name__.split(&#39;.&#39;)[0]:</span>
+<span class="gi">+                                    cond=True</span>
+<span class="gi">+                                else:</span>
+<span class="gi">+                                    cond=False</span>
+<span class="gi">+                            else:</span>
+<span class="gi">+                                cond = (</span>
+<span class="gi">+                                    imported or </span>
+<span class="gi">+                                    obj_name.__module__ == obj.__name__ </span>
+<span class="gi">+                                    )</span>
+<span class="gi">+                        except AttributeError:</span>
+<span class="gi">+                            cond = True</span>
+<span class="gi">+                        if cond:</span>
+<span class="gi">+                            items.append(name)</span>
+                 public = [x for x in items
+                           if x in include_public or not x.startswith(&#39;_&#39;)]
+                 return public, items
+</pre></div>
+</div>
+</div>
 </div>
 
 
