@@ -1,0 +1,1 @@
+https://wtak23.github.io/sphinx_skeleton_published/
