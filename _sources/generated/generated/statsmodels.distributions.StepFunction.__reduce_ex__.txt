@@ -1,0 +1,6 @@
+statsmodels.distributions.StepFunction.__reduce_ex__
+====================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: StepFunction.__reduce_ex__

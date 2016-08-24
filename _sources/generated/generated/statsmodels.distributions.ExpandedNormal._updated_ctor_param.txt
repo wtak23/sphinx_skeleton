@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._updated_ctor_param
+============================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._updated_ctor_param

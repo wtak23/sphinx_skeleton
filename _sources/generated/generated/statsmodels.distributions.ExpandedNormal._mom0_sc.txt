@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._mom0_sc
+=================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._mom0_sc

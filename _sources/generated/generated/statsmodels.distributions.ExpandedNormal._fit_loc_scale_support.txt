@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._fit_loc_scale_support
+===============================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._fit_loc_scale_support

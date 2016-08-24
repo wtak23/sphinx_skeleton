@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._logsf
+===============================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._logsf

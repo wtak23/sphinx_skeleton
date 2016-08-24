@@ -1,0 +1,26 @@
+statsmodels.distributions.ECDF
+==============================
+.. currentmodule:: statsmodels.distributions
+.. autoclass:: ECDF
+   :undoc-members:
+
+
+Methods
+-------
+.. autosummary::
+   :toctree:
+
+
+   ~ECDF.__call__
+   ~ECDF.__format__
+   ~ECDF.__init__
+   ~ECDF.__new__
+   ~ECDF.__reduce__
+   ~ECDF.__reduce_ex__
+   ~ECDF.__sizeof__
+   ~ECDF.__subclasshook__
+
+
+
+
+

@@ -1,0 +1,6 @@
+statsmodels.distributions.ECDF.__sizeof__
+=========================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ECDF.__sizeof__

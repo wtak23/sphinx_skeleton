@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._ppf_single
+====================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._ppf_single

@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._argcheck
+==================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._argcheck

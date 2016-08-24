@@ -1,0 +1,6 @@
+statsmodels.distributions.ECDF.__reduce__
+=========================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ECDF.__reduce__

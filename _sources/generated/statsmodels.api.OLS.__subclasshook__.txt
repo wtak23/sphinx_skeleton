@@ -1,0 +1,6 @@
+statsmodels.api.OLS.__subclasshook__
+====================================
+
+.. currentmodule:: statsmodels.api
+
+.. automethod:: OLS.__subclasshook__

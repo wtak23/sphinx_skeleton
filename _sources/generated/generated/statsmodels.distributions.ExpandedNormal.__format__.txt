@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal.__format__
+===================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal.__format__

@@ -1,0 +1,6 @@
+statsmodels.distributions.StepFunction.__new__
+==============================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: StepFunction.__new__

@@ -1,0 +1,26 @@
+statsmodels.distributions.StepFunction
+======================================
+.. currentmodule:: statsmodels.distributions
+.. autoclass:: StepFunction
+   :undoc-members:
+
+
+Methods
+-------
+.. autosummary::
+   :toctree:
+
+
+   ~StepFunction.__call__
+   ~StepFunction.__format__
+   ~StepFunction.__init__
+   ~StepFunction.__new__
+   ~StepFunction.__reduce__
+   ~StepFunction.__reduce_ex__
+   ~StepFunction.__sizeof__
+   ~StepFunction.__subclasshook__
+
+
+
+
+

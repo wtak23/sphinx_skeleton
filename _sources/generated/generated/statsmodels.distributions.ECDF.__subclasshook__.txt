@@ -1,0 +1,6 @@
+statsmodels.distributions.ECDF.__subclasshook__
+===============================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ECDF.__subclasshook__

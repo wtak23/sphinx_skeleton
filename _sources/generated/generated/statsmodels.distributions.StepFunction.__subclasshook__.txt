@@ -1,0 +1,6 @@
+statsmodels.distributions.StepFunction.__subclasshook__
+=======================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: StepFunction.__subclasshook__

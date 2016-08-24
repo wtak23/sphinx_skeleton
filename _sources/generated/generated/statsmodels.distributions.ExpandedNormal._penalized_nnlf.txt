@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._penalized_nnlf
+========================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._penalized_nnlf

@@ -1,0 +1,6 @@
+statsmodels.api.OLS._handle_data
+================================
+
+.. currentmodule:: statsmodels.api
+
+.. automethod:: OLS._handle_data

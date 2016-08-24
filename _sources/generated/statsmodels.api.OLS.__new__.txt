@@ -1,0 +1,6 @@
+statsmodels.api.OLS.__new__
+===========================
+
+.. currentmodule:: statsmodels.api
+
+.. automethod:: OLS.__new__

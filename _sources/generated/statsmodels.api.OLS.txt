@@ -1,0 +1,48 @@
+statsmodels.api.OLS
+===================
+.. currentmodule:: statsmodels.api
+.. autoclass:: OLS
+   :undoc-members:
+
+
+Methods
+-------
+.. autosummary::
+   :toctree:
+
+
+   ~OLS.__format__
+   ~OLS.__init__
+   ~OLS.__new__
+   ~OLS.__reduce__
+   ~OLS.__reduce_ex__
+   ~OLS.__sizeof__
+   ~OLS.__subclasshook__
+   ~OLS._get_init_kwds
+   ~OLS._handle_data
+   ~OLS.fit
+   ~OLS.fit_regularized
+   ~OLS.from_formula
+   ~OLS.hessian
+   ~OLS.information
+   ~OLS.initialize
+   ~OLS.loglike
+   ~OLS.predict
+   ~OLS.score
+   ~OLS.whiten
+
+
+
+
+
+Attributes
+----------
+.. autosummary::
+  :toctree:
+
+
+   ~OLS.df_model
+   ~OLS.df_resid
+   ~OLS.endog_names
+   ~OLS.exog_names
+

@@ -1,0 +1,6 @@
+statsmodels.api.OLS.__sizeof__
+==============================
+
+.. currentmodule:: statsmodels.api
+
+.. automethod:: OLS.__sizeof__

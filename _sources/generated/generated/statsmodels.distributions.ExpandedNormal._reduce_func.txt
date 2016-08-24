@@ -1,0 +1,6 @@
+statsmodels.distributions.ExpandedNormal._reduce_func
+=====================================================
+
+.. currentmodule:: statsmodels.distributions
+
+.. automethod:: ExpandedNormal._reduce_func

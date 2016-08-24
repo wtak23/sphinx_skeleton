@@ -1,0 +1,89 @@
+statsmodels.distributions.ExpandedNormal
+========================================
+.. currentmodule:: statsmodels.distributions
+.. autoclass:: ExpandedNormal
+   :undoc-members:
+
+
+Methods
+-------
+.. autosummary::
+   :toctree:
+
+
+   ~ExpandedNormal.__call__
+   ~ExpandedNormal.__format__
+   ~ExpandedNormal.__getstate__
+   ~ExpandedNormal.__init__
+   ~ExpandedNormal.__new__
+   ~ExpandedNormal.__reduce__
+   ~ExpandedNormal.__reduce_ex__
+   ~ExpandedNormal.__setstate__
+   ~ExpandedNormal.__sizeof__
+   ~ExpandedNormal.__subclasshook__
+   ~ExpandedNormal._argcheck
+   ~ExpandedNormal._cdf
+   ~ExpandedNormal._cdf_single
+   ~ExpandedNormal._compute_coefs_pdf
+   ~ExpandedNormal._construct_argparser
+   ~ExpandedNormal._construct_default_doc
+   ~ExpandedNormal._construct_doc
+   ~ExpandedNormal._entropy
+   ~ExpandedNormal._fit_loc_scale_support
+   ~ExpandedNormal._fitstart
+   ~ExpandedNormal._isf
+   ~ExpandedNormal._logcdf
+   ~ExpandedNormal._logpdf
+   ~ExpandedNormal._logsf
+   ~ExpandedNormal._mom0_sc
+   ~ExpandedNormal._mom1_sc
+   ~ExpandedNormal._mom_integ0
+   ~ExpandedNormal._mom_integ1
+   ~ExpandedNormal._munp
+   ~ExpandedNormal._nnlf
+   ~ExpandedNormal._pdf
+   ~ExpandedNormal._penalized_nnlf
+   ~ExpandedNormal._ppf
+   ~ExpandedNormal._ppf_single
+   ~ExpandedNormal._ppf_to_solve
+   ~ExpandedNormal._reduce_func
+   ~ExpandedNormal._rvs
+   ~ExpandedNormal._sf
+   ~ExpandedNormal._stats
+   ~ExpandedNormal._updated_ctor_param
+   ~ExpandedNormal.cdf
+   ~ExpandedNormal.entropy
+   ~ExpandedNormal.est_loc_scale
+   ~ExpandedNormal.expect
+   ~ExpandedNormal.fit
+   ~ExpandedNormal.fit_loc_scale
+   ~ExpandedNormal.freeze
+   ~ExpandedNormal.interval
+   ~ExpandedNormal.isf
+   ~ExpandedNormal.logcdf
+   ~ExpandedNormal.logpdf
+   ~ExpandedNormal.logsf
+   ~ExpandedNormal.mean
+   ~ExpandedNormal.median
+   ~ExpandedNormal.moment
+   ~ExpandedNormal.nnlf
+   ~ExpandedNormal.pdf
+   ~ExpandedNormal.ppf
+   ~ExpandedNormal.rvs
+   ~ExpandedNormal.sf
+   ~ExpandedNormal.stats
+   ~ExpandedNormal.std
+   ~ExpandedNormal.var
+
+
+
+
+
+Attributes
+----------
+.. autosummary::
+  :toctree:
+
+
+   ~ExpandedNormal.random_state
+

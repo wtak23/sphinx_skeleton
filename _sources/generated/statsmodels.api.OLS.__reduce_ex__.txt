@@ -1,0 +1,6 @@
+statsmodels.api.OLS.__reduce_ex__
+=================================
+
+.. currentmodule:: statsmodels.api
+
+.. automethod:: OLS.__reduce_ex__
