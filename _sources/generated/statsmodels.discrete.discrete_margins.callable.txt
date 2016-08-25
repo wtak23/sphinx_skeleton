@@ -1,0 +1,6 @@
+statsmodels.discrete.discrete_margins.callable
+==============================================
+
+.. currentmodule:: statsmodels.discrete.discrete_margins
+
+.. autofunction:: callable

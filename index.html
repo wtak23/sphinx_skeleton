@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sphinx Skeleton &mdash; Sphinx Skeleton v1</title>
+  <title>Sphinx Skeleton &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="#"/>
+    <link rel="top" title="Sphinx Skeleton" href="#"/>
         <link rel="next" title="1. Demo of autodoc’ing classes" href="demo_autoclass.html"/> 
 
   
@@ -87,6 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo_autoclass.html">1. Demo of autodoc&#8217;ing classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_automodule.html">2. Automodule demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -162,10 +163,39 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/statsmodels.distributions.html">2.2. statsmodels.distributions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
+</div>
+<p>These substitutions are predefined in Sphinx</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">|version|</span></code> = 1</li>
+<li><code class="docutils literal"><span class="pre">|release|</span></code> = 1</li>
+<li><code class="docutils literal"><span class="pre">|today|</span></code> = August 25, 2016</li>
+</ul>
+<p>All modules for which code is available (<a class="reference external" href="./_modules/index.html">link</a>)</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Just checking if the <code class="docutils literal"><span class="pre">todo</span></code> extension is loaded</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
+<p>Finally got the <code class="docutils literal"><span class="pre">copybutton.js</span></code> to work... Sphinx 1.4.5 didn&#8217;t render it correctly (rolled back to 1.3.5)...that was a soul-crushing experience...</p>
+<p>I also tried the latest Sphinx v1.5a0...also same issue...stick with v1.3.5 for a while.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Actually wait, after rolling back to Sphinx 1.3.5, the default ``generate.py`` seems to work fine...I&#8217;ll keep below for my own sake of learning</strong></p>
+<p>Appears that it&#8217;ll still create autodoc for external <strong>functions</strong>, but would ignore external <strong>class</strong>...I think I&#8217;m fine with that... (<a class="reference external" href="./_modules/index.html">see here to see what got *auto-doc&#8217;ed*</a>)</p>
+<p>File at: <code class="docutils literal"><span class="pre">${HOME}/anaconda2/lib/python2.7/site-packages/Sphinx-1.3.5-py2.7.egg/sphinx/ext/autosummary/generate.py</span></code></p>
+<p class="last">In Sphinx v.1.4.5, it Autodoc&#8217;ed external classes, which made compilation time soooooo much longer (for example, when my module loaded <code class="docutils literal"><span class="pre">from</span> <span class="pre">pandas</span> <span class="pre">import</span> <span class="pre">DataFrame,</span> <span class="pre">Series</span></code>, it rendered bunch of things I didn&#8217;t want to document)</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>(note: now obsolete 25 August 2016 (Thursday) after i rolled back sphinx to v1.3.5). just keeping it here since i found below informative in learning the internals of sphinx</strong></p>
 <p>Minor change made in Sphinx source code <code class="docutils literal"><span class="pre">generate.py</span></code> to avoid adding <cite>autodoc</cite> to imported member functions/classes</p>
 <p>(located at <code class="docutils literal"><span class="pre">$HOME/.local/lib/python2.7/site-packages/sphinx/ext/autosummary/generate.py</span></code>)</p>
 <p>Unlike the overflow threads below, I decided to allow the imported function to be included in the <code class="docutils literal"><span class="pre">autosummary</span></code> if it comes from the same package</p>
@@ -279,6 +309,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

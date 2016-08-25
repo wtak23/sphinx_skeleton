@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.2.2.2.1.45. statsmodels.distributions.ExpandedNormal.fit &mdash; Sphinx Skeleton v1</title>
+  <title>2.2.2.2.1.45. statsmodels.distributions.ExpandedNormal.fit &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="../../index.html"/>
+    <link rel="top" title="Sphinx Skeleton" href="../../index.html"/>
         <link rel="up" title="2.2.2.2. statsmodels.distributions.ExpandedNormal" href="statsmodels.distributions.ExpandedNormal.html"/>
         <link rel="next" title="2.2.2.2.1.46. statsmodels.distributions.ExpandedNormal.fit_loc_scale" href="statsmodels.distributions.ExpandedNormal.fit_loc_scale.html"/>
         <link rel="prev" title="2.2.2.2.1.44. statsmodels.distributions.ExpandedNormal.expect" href="statsmodels.distributions.ExpandedNormal.expect.html"/> 
@@ -102,6 +102,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -233,18 +234,18 @@ may only be locally optimal, or the optimization may fail altogether.</p>
 <p class="rubric">Examples</p>
 <p>Generate some data to fit: draw random variates from the <cite>beta</cite>
 distribution</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">beta</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we can fit all four parameters (<code class="docutils literal"><span class="pre">a</span></code>, <code class="docutils literal"><span class="pre">b</span></code>, <code class="docutils literal"><span class="pre">loc</span></code> and <code class="docutils literal"><span class="pre">scale</span></code>):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
 </pre></div>
 </div>
 <p>We can also use some prior knowledge about the dataset: let&#8217;s keep 
 <code class="docutils literal"><span class="pre">loc</span></code> and <code class="docutils literal"><span class="pre">scale</span></code> fixed:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span>
 <span class="go">(0, 1)</span>
 </pre></div>
@@ -252,7 +253,7 @@ distribution</p>
 <p>We can also keep shape parameters fixed by using <code class="docutils literal"><span class="pre">f</span></code>-keywords. To
 keep the zero-th shape parameter <code class="docutils literal"><span class="pre">a</span></code> equal 1, use <code class="docutils literal"><span class="pre">f0=1</span></code> or,
 equivalently, <code class="docutils literal"><span class="pre">fa=1</span></code>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fa</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">loc1</span><span class="p">,</span> <span class="n">scale1</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fa</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span>
 <span class="go">1</span>
 </pre></div>
@@ -311,6 +312,7 @@ equivalently, <code class="docutils literal"><span class="pre">fa=1</span></code
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

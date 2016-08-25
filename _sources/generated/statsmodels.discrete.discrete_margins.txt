@@ -11,6 +11,8 @@ statsmodels.discrete.discrete_margins
       :toctree:
 
    
+      callable
+      lzip
       margeff
       margeff_cov_params
       margeff_cov_with_se
@@ -28,6 +30,7 @@ statsmodels.discrete.discrete_margins
    
       DiscreteMargins
       Margins
+      range
       resettable_cache
 
    .. toctree::
@@ -37,6 +40,7 @@ statsmodels.discrete.discrete_margins
    
        generated/statsmodels.discrete.discrete_margins.DiscreteMargins
        generated/statsmodels.discrete.discrete_margins.Margins
+       generated/statsmodels.discrete.discrete_margins.range
        generated/statsmodels.discrete.discrete_margins.resettable_cache
 
    

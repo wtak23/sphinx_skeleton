@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>statsmodels.base.model &mdash; Sphinx Skeleton v1</title>
+  <title>statsmodels.base.model &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="../../../index.html"/>
+    <link rel="top" title="Sphinx Skeleton" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -87,6 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../demo_autoclass.html">1. Demo of autodoc&#8217;ing classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demo_automodule.html">2. Automodule demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -146,19 +147,19 @@
            <div itemprop="articleBody">
             
   <h1>Source code for statsmodels.base.model</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">statsmodels.compat.python</span> <span class="k">import</span> <span class="n">iterkeys</span><span class="p">,</span> <span class="n">lzip</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">reduce</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">statsmodels.base.data</span> <span class="k">import</span> <span class="n">handle_data</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tools.tools</span> <span class="k">import</span> <span class="n">recipr</span><span class="p">,</span> <span class="n">nan_dot</span>
-<span class="kn">from</span> <span class="nn">statsmodels.stats.contrast</span> <span class="k">import</span> <span class="n">ContrastResults</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tools.decorators</span> <span class="k">import</span> <span class="n">resettable_cache</span><span class="p">,</span> <span class="n">cache_readonly</span>
-<span class="kn">import</span> <span class="nn">statsmodels.base.wrapper</span> <span class="k">as</span> <span class="nn">wrap</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">import</span> <span class="n">approx_fprime</span>
-<span class="kn">from</span> <span class="nn">statsmodels.formula</span> <span class="k">import</span> <span class="n">handle_formula_data</span>
-<span class="kn">from</span> <span class="nn">statsmodels.compat.numpy</span> <span class="k">import</span> <span class="n">np_matrix_rank</span>
-<span class="kn">from</span> <span class="nn">statsmodels.base.optimizer</span> <span class="k">import</span> <span class="n">Optimizer</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">statsmodels.compat.python</span> <span class="kn">import</span> <span class="n">iterkeys</span><span class="p">,</span> <span class="n">lzip</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">reduce</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">statsmodels.base.data</span> <span class="kn">import</span> <span class="n">handle_data</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.tools</span> <span class="kn">import</span> <span class="n">recipr</span><span class="p">,</span> <span class="n">nan_dot</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.contrast</span> <span class="kn">import</span> <span class="n">ContrastResults</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.decorators</span> <span class="kn">import</span> <span class="n">resettable_cache</span><span class="p">,</span> <span class="n">cache_readonly</span>
+<span class="kn">import</span> <span class="nn">statsmodels.base.wrapper</span> <span class="kn">as</span> <span class="nn">wrap</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="kn">import</span> <span class="n">approx_fprime</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula</span> <span class="kn">import</span> <span class="n">handle_formula_data</span>
+<span class="kn">from</span> <span class="nn">statsmodels.compat.numpy</span> <span class="kn">import</span> <span class="n">np_matrix_rank</span>
+<span class="kn">from</span> <span class="nn">statsmodels.base.optimizer</span> <span class="kn">import</span> <span class="n">Optimizer</span>
 
 
 <span class="n">_model_params_doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -201,9 +202,9 @@
 <span class="s2">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;params_doc&#39;</span> <span class="p">:</span> <span class="n">_model_params_doc</span><span class="p">,</span>
            <span class="s1">&#39;extra_params_doc&#39;</span> <span class="p">:</span> <span class="n">_missing_param_doc</span> <span class="o">+</span> <span class="n">_extra_param_doc</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;missing&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
-        <span class="n">hasconst</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hasconst&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">hasconst</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hasconst&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_data</span><span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">missing</span><span class="p">,</span> <span class="n">hasconst</span><span class="p">,</span>
                                       <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_constant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">k_constant</span>
@@ -215,14 +216,14 @@
         <span class="c1"># store keys for extras if we need to recreate model instance</span>
         <span class="c1"># we don&#39;t need &#39;missing&#39;, maybe we need &#39;hasconst&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">hasconst</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hasconst</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_init_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;hasconst&#39;</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_get_init_kwds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;return dictionary with extra keys used in model.__init__</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">kwds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(((</span><span class="n">key</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">kwds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(((</span><span class="n">key</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
                          <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_keys</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">kwds</span>
@@ -240,7 +241,7 @@
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_formula</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_formula</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a Model from a formula and dataframe.</span>
 
@@ -277,20 +278,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#TODO: provide a docs template for args/kwargs from child models</span>
         <span class="c1">#TODO: subset could use syntax. issue #469.</span>
-        <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">subset</span><span class="p">]</span>
-        <span class="n">eval_env</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;eval_env&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">eval_env</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">eval_env</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;eval_env&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">eval_env</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">eval_env</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="k">elif</span> <span class="n">eval_env</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">patsy</span> <span class="k">import</span> <span class="n">EvalEnvironment</span>
+            <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">EvalEnvironment</span>
             <span class="n">eval_env</span> <span class="o">=</span> <span class="n">EvalEnvironment</span><span class="p">({})</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">eval_env</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># we&#39;re going down the stack again</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;missing&#39;</span><span class="p">,</span> <span class="s1">&#39;drop&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>  <span class="c1"># with patys it&#39;s drop or raise. let&#39;s raise.</span>
             <span class="n">missing</span> <span class="o">=</span> <span class="s1">&#39;raise&#39;</span>
-        <span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">),</span> <span class="n">missing_idx</span> <span class="o">=</span> <span class="n">handle_formula_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">),</span> <span class="n">missing_idx</span> <span class="o">=</span> <span class="n">handle_formula_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span>
                                                          <span class="n">depth</span><span class="o">=</span><span class="n">eval_env</span><span class="p">,</span>
                                                          <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;missing_idx&#39;</span><span class="p">:</span> <span class="n">missing_idx</span><span class="p">,</span>
@@ -316,7 +317,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        After a model has been fit predict returns the fitted values.</span>
 
@@ -330,7 +331,7 @@
 <span class="sd">    Likelihood model is a subclass of Model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LikelihoodModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
@@ -373,9 +374,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;newton&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(),</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">skip_hessian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;newton&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">full_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(),</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">retall</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">skip_hessian</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fit method for likelihood based models</span>
 
@@ -531,12 +532,12 @@
 <span class="sd">                      - `jac` &lt;- `score`</span>
 <span class="sd">                      - `hess` &lt;- `hess`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Hinv</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># JP error if full_output=0, Hinv not defined</span>
+        <span class="n">Hinv</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># JP error if full_output=0, Hinv not defined</span>
 
-        <span class="k">if</span> <span class="n">start_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">start_params</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;start_params&#39;</span><span class="p">):</span>
                 <span class="n">start_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_params</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="c1"># fails for shape (K,)?</span>
                 <span class="n">start_params</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
@@ -553,14 +554,14 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">hess</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">nobs</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">hess</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">hess</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;newton&#39;</span><span class="p">:</span>
             <span class="n">score</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">nobs</span>
             <span class="n">hess</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">nobs</span>
             <span class="c1">#TODO: why are score and hess positive?</span>
 
-        <span class="n">warn_convergence</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;warn_convergence&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">warn_convergence</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;warn_convergence&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
         <span class="n">optimizer</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="p">()</span>
         <span class="n">xopt</span><span class="p">,</span> <span class="n">retvals</span><span class="p">,</span> <span class="n">optim_settings</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">_fit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">start_params</span><span class="p">,</span>
                                                        <span class="n">fargs</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span>
@@ -573,7 +574,7 @@
                                                        <span class="n">full_output</span><span class="o">=</span><span class="n">full_output</span><span class="p">)</span>
 
         <span class="c1">#NOTE: this is for fit_regularized and should be generalized</span>
-        <span class="n">cov_params_func</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;cov_params_func&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">cov_params_func</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;cov_params_func&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">full_output</span><span class="p">:</span> <span class="c1"># xopt should be None and retvals is argmin</span>
             <span class="n">xopt</span> <span class="o">=</span> <span class="n">retvals</span>
         <span class="k">elif</span> <span class="n">cov_params_func</span><span class="p">:</span>
@@ -585,11 +586,11 @@
                 <span class="n">Hinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">xopt</span><span class="p">))</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="c1">#might want custom warning ResultsWarning? NumericalWarning?</span>
-                <span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+                <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
                 <span class="n">warndoc</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Inverting hessian failed, no bse or &#39;</span>
                            <span class="s1">&#39;cov_params available&#39;</span><span class="p">)</span>
                 <span class="n">warn</span><span class="p">(</span><span class="n">warndoc</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
-                <span class="n">Hinv</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">Hinv</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="k">if</span> <span class="s1">&#39;cov_type&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">cov_kwds</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cov_kwds&#39;</span><span class="p">,</span> <span class="p">{})</span>
@@ -608,8 +609,8 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">retvals</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">mlefit</span><span class="o">.</span><span class="n">mle_retvals</span> <span class="o">=</span> <span class="n">retvals</span>
             <span class="k">if</span> <span class="n">warn_convergence</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">retvals</span><span class="p">[</span><span class="s1">&#39;converged&#39;</span><span class="p">]:</span>
-                <span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
-                <span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="k">import</span> <span class="n">ConvergenceWarning</span>
+                <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+                <span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
                 <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Maximum Likelihood optimization failed to converge. &quot;</span>
                      <span class="s2">&quot;Check mle_retvals&quot;</span><span class="p">,</span> <span class="n">ConvergenceWarning</span><span class="p">)</span>
 
@@ -665,15 +666,15 @@
 <span class="sd">    np.allclose(res.params, probit_res.params)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">loglike</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">hessian</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">extra_params_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loglike</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">hessian</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">extra_params_names</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
     <span class="c1"># let them be none in case user wants to use inheritance</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">loglike</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">loglike</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">loglike</span> <span class="o">=</span> <span class="n">loglike</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">score</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">score</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">hessian</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hessian</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hessian</span> <span class="o">=</span> <span class="n">hessian</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds</span><span class="p">)</span>
@@ -687,17 +688,17 @@
                                                      <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span>
 
         <span class="c1"># this won&#39;t work for ru2nmnl, maybe np.ndim of a dict?</span>
-        <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#try:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nparams</span> <span class="o">=</span> <span class="p">(</span><span class="n">exog</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">exog</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">extra_params_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">extra_params_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_set_extra_params_names</span><span class="p">(</span><span class="n">extra_params_names</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_extra_params_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extra_params_names</span><span class="p">):</span>
         <span class="c1"># check param_names</span>
-        <span class="k">if</span> <span class="n">extra_params_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">extra_params_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">exog_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">extra_params_names</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">xnames</span> <span class="o">=</span> <span class="n">extra_params_names</span>
@@ -716,8 +717,8 @@
         <span class="c1">#Initialize is called by</span>
         <span class="c1">#statsmodels.model.LikelihoodModel.__init__</span>
         <span class="c1">#and should contain any preprocessing that needs to be done for a model</span>
-        <span class="kn">from</span> <span class="nn">statsmodels.tools</span> <span class="k">import</span> <span class="n">tools</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.tools</span> <span class="kn">import</span> <span class="n">tools</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1"># assume constant</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">df_model</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np_matrix_rank</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">df_resid</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exog</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span>
@@ -775,7 +776,7 @@
 <span class="sd">        Gradient of log-likelihood evaluated at params</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">kwds</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">kwds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">kwds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">approx_fprime</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglike</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">score_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
@@ -784,7 +785,7 @@
 <span class="sd">        observation.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1">#kwds.setdefault(&#39;epsilon&#39;, 1e-4)</span>
-        <span class="n">kwds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">kwds</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">approx_fprime</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglikeobs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 
     <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deprecate</span><span class="p">(</span><span class="n">score_obs</span><span class="p">,</span> <span class="s1">&#39;jac&#39;</span><span class="p">,</span> <span class="s1">&#39;score_obs&#39;</span><span class="p">,</span> <span class="s2">&quot;Use score_obs method.&quot;</span>
@@ -794,19 +795,19 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Hessian of log-likelihood evaluated at params</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">import</span> <span class="n">approx_hess</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="kn">import</span> <span class="n">approx_hess</span>
         <span class="c1"># need options for hess (epsilon)</span>
         <span class="k">return</span> <span class="n">approx_hess</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglike</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">disp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retall</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">disp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">retall</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fit the model using maximum likelihood.</span>
 
 <span class="sd">        The rest of the docstring is from</span>
 <span class="sd">        statsmodels.LikelihoodModel.fit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">start_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">start_params</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;start_params&#39;</span><span class="p">):</span>
                 <span class="n">start_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_params</span>
             <span class="k">else</span><span class="p">:</span>
@@ -820,7 +821,7 @@
         <span class="n">genericmlefit</span> <span class="o">=</span> <span class="n">GenericLikelihoodModelResults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mlefit</span><span class="p">)</span>
 
         <span class="c1">#amend param names</span>
-        <span class="n">exog_names</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exog_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog_names</span>
+        <span class="n">exog_names</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exog_names</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog_names</span>
         <span class="n">k_miss</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">exog_names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">mlefit</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">k_miss</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k_miss</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -857,7 +858,7 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;k_constant&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">k_constant</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">k_constant</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call self.model.predict with self.params as the first argument.</span>
 
@@ -882,16 +883,16 @@
 <span class="sd">            See self.model.predict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">transform</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;formula&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">patsy</span> <span class="k">import</span> <span class="n">dmatrix</span>
+        <span class="k">if</span> <span class="n">transform</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;formula&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
             <span class="n">exog</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orig_exog</span><span class="o">.</span><span class="n">design_info</span><span class="o">.</span><span class="n">builder</span><span class="p">,</span>
                            <span class="n">exog</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">exog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">exog</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">exog</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
                                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">exog</span> <span class="o">=</span> <span class="n">exog</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="n">exog</span> <span class="o">=</span> <span class="n">exog</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span>
             <span class="n">exog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">exog</span><span class="p">)</span>  <span class="c1"># needed in count model shape[1]</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1056,9 +1057,9 @@
 
     <span class="c1"># by default we use normal distribution</span>
     <span class="c1"># can be overwritten by instances or subclasses</span>
-    <span class="n">use_t</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">use_t</span> <span class="o">=</span> <span class="bp">False</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">normalized_cov_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">normalized_cov_params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">LikelihoodModelResults</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="o">=</span> <span class="n">normalized_cov_params</span>
@@ -1069,7 +1070,7 @@
         <span class="c1"># use this generic implementation</span>
         <span class="k">if</span> <span class="s1">&#39;use_t&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">use_t</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;use_t&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">use_t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">use_t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">use_t</span> <span class="o">=</span> <span class="n">use_t</span>
         <span class="k">if</span> <span class="s1">&#39;cov_type&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">cov_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cov_type&#39;</span><span class="p">,</span> <span class="s1">&#39;nonrobust&#39;</span><span class="p">)</span>
@@ -1081,12 +1082,12 @@
                                  <span class="s1">&#39;covariance matrix of the errors is correctly &#39;</span> <span class="o">+</span>
                                  <span class="s1">&#39;specified.&#39;</span><span class="p">}</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">statsmodels.base.covtype</span> <span class="k">import</span> <span class="n">get_robustcov_results</span>
-                <span class="k">if</span> <span class="n">cov_kwds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">statsmodels.base.covtype</span> <span class="kn">import</span> <span class="n">get_robustcov_results</span>
+                <span class="k">if</span> <span class="n">cov_kwds</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">cov_kwds</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="n">use_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_t</span>
                 <span class="c1"># TODO: we shouldn&#39;t need use_t in get_robustcov_results</span>
-                <span class="n">get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                            <span class="n">use_t</span><span class="o">=</span><span class="n">use_t</span><span class="p">,</span> <span class="o">**</span><span class="n">cov_kwds</span><span class="p">)</span>
 
 
@@ -1094,10 +1095,10 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 
-    <span class="k">def</span> <span class="nf">_get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;nonrobust&#39;</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">use_t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">cov_kwds</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">statsmodels.base.covtype</span> <span class="k">import</span> <span class="n">get_robustcov_results</span>
-        <span class="k">if</span> <span class="n">cov_kwds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;nonrobust&#39;</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                   <span class="n">use_t</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">cov_kwds</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.base.covtype</span> <span class="kn">import</span> <span class="n">get_robustcov_results</span>
+        <span class="k">if</span> <span class="n">cov_kwds</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">cov_kwds</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="n">cov_type</span> <span class="o">==</span> <span class="s1">&#39;nonrobust&#39;</span><span class="p">:</span>
@@ -1107,7 +1108,7 @@
                              <span class="s1">&#39;specified.&#39;</span><span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># TODO: we shouldn&#39;t need use_t in get_robustcov_results</span>
-            <span class="n">get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">get_robustcov_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cov_type</span><span class="o">=</span><span class="n">cov_type</span><span class="p">,</span> <span class="n">use_self</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                        <span class="n">use_t</span><span class="o">=</span><span class="n">use_t</span><span class="p">,</span> <span class="o">**</span><span class="n">cov_kwds</span><span class="p">)</span>
 
     <span class="nd">@cache_readonly</span>
@@ -1134,8 +1135,8 @@
             <span class="k">return</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tvalues</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span>
 
 
-    <span class="k">def</span> <span class="nf">cov_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">cov_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="n">other</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the variance/covariance matrix.</span>
 
@@ -1189,36 +1190,36 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dot_fun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">cov_p</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cov_p</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
             <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cov_params_default&#39;</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;need covariance of parameters for computing &#39;</span>
                              <span class="s1">&#39;(unnormalized) covariances&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">r_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">other</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">r_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">other</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Column should be specified without other &#39;</span>
                              <span class="s1">&#39;arguments.&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">r_matrix</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;other can only be specified with r_matrix&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cov_params_default&#39;</span><span class="p">):</span>
                 <span class="n">cov_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov_params_default</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
                 <span class="n">cov_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="o">*</span> <span class="n">scale</span>
 
-        <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">column</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">column</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
                 <span class="k">return</span> <span class="n">cov_p</span><span class="p">[</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1">#return cov_p[column][:, column]</span>
-                <span class="k">return</span> <span class="n">cov_p</span><span class="p">[</span><span class="n">column</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">column</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">r_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">cov_p</span><span class="p">[</span><span class="n">column</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">],</span> <span class="n">column</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">r_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">r_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">r_matrix</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;r_matrix should be 1d or 2d&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">other</span> <span class="o">=</span> <span class="n">r_matrix</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">other</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -1228,8 +1229,8 @@
             <span class="k">return</span> <span class="n">cov_p</span>
 
     <span class="c1">#TODO: make sure this works as needed for GLMs</span>
-    <span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">use_t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+               <span class="n">use_t</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute a t-test for a each linear hypothesis of the form Rb = q</span>
 
@@ -1307,19 +1308,19 @@
 <span class="sd">        f_test : for F tests</span>
 <span class="sd">        patsy.DesignInfo.linear_constraint</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">patsy</span> <span class="k">import</span> <span class="n">DesignInfo</span>
+        <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">DesignInfo</span>
         <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">param_names</span>
         <span class="n">LC</span> <span class="o">=</span> <span class="n">DesignInfo</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">linear_constraint</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">)</span>
         <span class="n">r_matrix</span><span class="p">,</span> <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">LC</span><span class="o">.</span><span class="n">coefs</span><span class="p">,</span> <span class="n">LC</span><span class="o">.</span><span class="n">constants</span>
         <span class="n">num_ttests</span> <span class="o">=</span> <span class="n">r_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">num_params</span> <span class="o">=</span> <span class="n">r_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Need covariance of parameters for computing &#39;</span>
                              <span class="s1">&#39;T statistics&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num_params</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;r_matrix and params are not aligned&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">q_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">q_matrix</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_ttests</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q_matrix</span><span class="p">)</span>
@@ -1329,11 +1330,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;r_matrix and q_matrix must have the same &quot;</span>
                                  <span class="s2">&quot;number of rows&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">use_t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use_t</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#switch to use_t false if undefined</span>
             <span class="n">use_t</span> <span class="o">=</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;use_t&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_t</span><span class="p">)</span>
 
-        <span class="n">_t</span> <span class="o">=</span> <span class="n">_sd</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">_t</span> <span class="o">=</span> <span class="n">_sd</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="n">_effect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="c1"># nan_dot multiplies with the convention nan * 0 = 0</span>
@@ -1356,7 +1357,7 @@
                                    <span class="n">df_denom</span><span class="o">=</span><span class="n">df_resid</span><span class="p">,</span>
                                    <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">invcov</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">invcov</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the F-test for a joint linear hypothesis.</span>
 
@@ -1450,12 +1451,12 @@
 <span class="sd">        where the rank of the covariance of the noise is not full.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wald_test</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="n">cov_p</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-                             <span class="n">invcov</span><span class="o">=</span><span class="n">invcov</span><span class="p">,</span> <span class="n">use_f</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                             <span class="n">invcov</span><span class="o">=</span><span class="n">invcov</span><span class="p">,</span> <span class="n">use_f</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span>
 
     <span class="c1">#TODO: untested for GLMs?</span>
-    <span class="k">def</span> <span class="nf">wald_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">invcov</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                  <span class="n">use_f</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wald_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">invcov</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                  <span class="n">use_f</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute a Wald-test for a joint linear hypothesis.</span>
 
@@ -1506,33 +1507,33 @@
 <span class="sd">        design matrix of the model. There can be problems in non-OLS models</span>
 <span class="sd">        where the rank of the covariance of the noise is not full.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">use_f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use_f</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#switch to use_t false if undefined</span>
             <span class="n">use_f</span> <span class="o">=</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;use_t&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_t</span><span class="p">)</span>
 
-        <span class="kn">from</span> <span class="nn">patsy</span> <span class="k">import</span> <span class="n">DesignInfo</span>
+        <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">DesignInfo</span>
         <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">param_names</span>
         <span class="n">LC</span> <span class="o">=</span> <span class="n">DesignInfo</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">linear_constraint</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">)</span>
         <span class="n">r_matrix</span><span class="p">,</span> <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">LC</span><span class="o">.</span><span class="n">coefs</span><span class="p">,</span> <span class="n">LC</span><span class="o">.</span><span class="n">constants</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>
-                <span class="n">invcov</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cov_p</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span>
+                <span class="n">invcov</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;need covariance of parameters for computing &#39;</span>
                              <span class="s1">&#39;F statistics&#39;</span><span class="p">)</span>
 
-        <span class="n">cparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
+        <span class="n">cparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">])</span>
         <span class="n">J</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># number of restrictions</span>
-        <span class="k">if</span> <span class="n">q_matrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">q_matrix</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q_matrix</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">q_matrix</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">q_matrix</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">q_matrix</span> <span class="o">=</span> <span class="n">q_matrix</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">q_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">J</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;r_matrix and q_matrix must have the same &quot;</span>
                                  <span class="s2">&quot;number of rows&quot;</span><span class="p">)</span>
         <span class="n">Rbq</span> <span class="o">=</span> <span class="n">cparams</span> <span class="o">-</span> <span class="n">q_matrix</span>
-        <span class="k">if</span> <span class="n">invcov</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">invcov</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">cov_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov_params</span><span class="p">(</span><span class="n">r_matrix</span><span class="o">=</span><span class="n">r_matrix</span><span class="p">,</span> <span class="n">cov_p</span><span class="o">=</span><span class="n">cov_p</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">cov_p</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">():</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;r_matrix performs f_test for using &quot;</span>
@@ -1555,7 +1556,7 @@
             <span class="k">return</span> <span class="n">ContrastResults</span><span class="p">(</span><span class="n">chi2</span><span class="o">=</span><span class="n">F</span><span class="p">,</span> <span class="n">df_denom</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">statistic</span><span class="o">=</span><span class="n">F</span><span class="p">,</span>
                                    <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;chi2&#39;</span><span class="p">,</span> <span class="n">distargs</span><span class="o">=</span><span class="p">(</span><span class="n">J</span><span class="p">,))</span>
 
-    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the confidence interval of the fitted parameters.</span>
 
@@ -1620,7 +1621,7 @@
             <span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">cols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cols</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">lower</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">bse</span>
             <span class="n">upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">bse</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1629,7 +1630,7 @@
             <span class="n">upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">bse</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">lzip</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">remove_data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">remove_data</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        save a pickle of this instance</span>
 
@@ -1650,7 +1651,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="kn">from</span> <span class="nn">statsmodels.iolib.smpickle</span> <span class="k">import</span> <span class="n">save_pickle</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.iolib.smpickle</span> <span class="kn">import</span> <span class="n">save_pickle</span>
 
         <span class="k">if</span> <span class="n">remove_data</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">remove_data</span><span class="p">()</span>
@@ -1673,7 +1674,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="kn">from</span> <span class="nn">statsmodels.iolib.smpickle</span> <span class="k">import</span> <span class="n">load_pickle</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.iolib.smpickle</span> <span class="kn">import</span> <span class="n">load_pickle</span>
         <span class="k">return</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">remove_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1701,13 +1702,13 @@
             <span class="n">p</span> <span class="o">=</span> <span class="n">att</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
             <span class="n">att_</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">obj_</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">getattr</span><span class="p">,</span> <span class="p">[</span><span class="n">obj</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span>
+                <span class="n">obj_</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="nb">getattr</span><span class="p">,</span> <span class="p">[</span><span class="n">obj</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span>
 
                 <span class="c1">#print(repr(obj), repr(att))</span>
                 <span class="c1">#print(hasattr(obj_, att_))</span>
                 <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj_</span><span class="p">,</span> <span class="n">att_</span><span class="p">):</span>
                     <span class="c1">#print(&#39;removing3&#39;, att_)</span>
-                    <span class="nb">setattr</span><span class="p">(</span><span class="n">obj_</span><span class="p">,</span> <span class="n">att_</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">obj_</span><span class="p">,</span> <span class="n">att_</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -1720,7 +1721,7 @@
         <span class="n">data_in_cache</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;fittedvalues&#39;</span><span class="p">,</span> <span class="s1">&#39;resid&#39;</span><span class="p">,</span> <span class="s1">&#39;wresid&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data_in_cache</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
                 <span class="k">pass</span>
 
@@ -1862,8 +1863,8 @@
 <span class="sd">        distributed observations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span>
-        <span class="n">hascloneattr</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cloneattr&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span>
+        <span class="n">hascloneattr</span> <span class="o">=</span> <span class="bp">True</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cloneattr&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="bp">False</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrep</span><span class="p">):</span>
             <span class="n">rvsind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nobs</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nobs</span><span class="p">)</span>
             <span class="c1">#this needs to set startparam and get other defining attributes</span>
@@ -1964,7 +1965,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="n">resettable_cache</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mlefit</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">xname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Summarize the Regression Results</span>
 
 <span class="sd">        Parameters</span>
@@ -1992,35 +1993,35 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">top_left</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Dep. Variable:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s1">&#39;Model:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Dep. Variable:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;Model:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
                     <span class="p">(</span><span class="s1">&#39;Method:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Maximum Likelihood&#39;</span><span class="p">]),</span>
-                    <span class="p">(</span><span class="s1">&#39;Date:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s1">&#39;Time:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s1">&#39;No. Observations:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s1">&#39;Df Residuals:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>  <span class="c1"># [self.df_resid]),</span>
-                    <span class="p">(</span><span class="s1">&#39;Df Model:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>  <span class="c1"># [self.df_model])</span>
+                    <span class="p">(</span><span class="s1">&#39;Date:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;Time:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;No. Observations:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;Df Residuals:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>  <span class="c1"># [self.df_resid]),</span>
+                    <span class="p">(</span><span class="s1">&#39;Df Model:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>  <span class="c1"># [self.df_model])</span>
                     <span class="p">]</span>
 
         <span class="n">top_right</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># (&#39;R-squared:&#39;, [&quot;%#8.3f&quot; % self.rsquared]),</span>
                        <span class="c1"># (&#39;Adj. R-squared:&#39;, [&quot;%#8.3f&quot; % self.rsquared_adj]),</span>
                        <span class="c1"># (&#39;F-statistic:&#39;, [&quot;%#8.4g&quot; % self.fvalue] ),</span>
                        <span class="c1"># (&#39;Prob (F-statistic):&#39;, [&quot;%#6.3g&quot; % self.f_pvalue]),</span>
-                     <span class="p">(</span><span class="s1">&#39;Log-Likelihood:&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>  <span class="c1"># [&quot;%#6.4g&quot; % self.llf]),</span>
+                     <span class="p">(</span><span class="s1">&#39;Log-Likelihood:&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>  <span class="c1"># [&quot;%#6.4g&quot; % self.llf]),</span>
                      <span class="p">(</span><span class="s1">&#39;AIC:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">%#8.4g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">aic</span><span class="p">]),</span>
                      <span class="p">(</span><span class="s1">&#39;BIC:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">%#8.4g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bic</span><span class="p">])</span>
                      <span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s2">&quot;Results&quot;</span>
 
         <span class="c1">#create summary table instance</span>
-        <span class="kn">from</span> <span class="nn">statsmodels.iolib.summary</span> <span class="k">import</span> <span class="n">Summary</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.iolib.summary</span> <span class="kn">import</span> <span class="n">Summary</span>
         <span class="n">smry</span> <span class="o">=</span> <span class="n">Summary</span><span class="p">()</span>
         <span class="n">smry</span><span class="o">.</span><span class="n">add_table_2cols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gleft</span><span class="o">=</span><span class="n">top_left</span><span class="p">,</span> <span class="n">gright</span><span class="o">=</span><span class="n">top_right</span><span class="p">,</span>
                              <span class="n">yname</span><span class="o">=</span><span class="n">yname</span><span class="p">,</span> <span class="n">xname</span><span class="o">=</span><span class="n">xname</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
         <span class="n">smry</span><span class="o">.</span><span class="n">add_table_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="n">yname</span><span class="p">,</span> <span class="n">xname</span><span class="o">=</span><span class="n">xname</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
-                              <span class="n">use_t</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                              <span class="n">use_t</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">smry</span>
 </pre></div>
@@ -2065,6 +2066,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

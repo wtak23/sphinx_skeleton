@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>statsmodels.discrete.discrete_margins &mdash; Sphinx Skeleton v1</title>
+  <title>statsmodels.discrete.discrete_margins &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="../../../index.html"/>
+    <link rel="top" title="Sphinx Skeleton" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -87,6 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../demo_autoclass.html">1. Demo of autodoc&#8217;ing classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demo_automodule.html">2. Automodule demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -148,10 +149,10 @@
   <h1>Source code for statsmodels.discrete.discrete_margins</h1><div class="highlight"><pre>
 <span></span><span class="c1">#Splitting out maringal effects to see if they can be generalized</span>
 
-<span class="kn">from</span> <span class="nn">statsmodels.compat.python</span> <span class="k">import</span> <span class="n">lzip</span><span class="p">,</span> <span class="n">callable</span><span class="p">,</span> <span class="nb">range</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">norm</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tools.decorators</span> <span class="k">import</span> <span class="n">cache_readonly</span><span class="p">,</span> <span class="n">resettable_cache</span>
+<span class="kn">from</span> <span class="nn">statsmodels.compat.python</span> <span class="kn">import</span> <span class="n">lzip</span><span class="p">,</span> <span class="nb">callable</span><span class="p">,</span> <span class="nb">range</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.decorators</span> <span class="kn">import</span> <span class="n">cache_readonly</span><span class="p">,</span> <span class="n">resettable_cache</span>
 
 <span class="c1">#### margeff helper functions ####</span>
 <span class="c1">#NOTE: todo marginal effects for group 2</span>
@@ -184,7 +185,7 @@
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="o">~</span><span class="n">effects_idx</span><span class="p">):</span>
         <span class="n">const_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">effects_idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">const_idx</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">const_idx</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="k">return</span> <span class="n">effects_idx</span><span class="p">,</span> <span class="n">const_idx</span>
 
 <span class="k">def</span> <span class="nf">_isdummy</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -217,13 +218,13 @@
 
 <span class="k">def</span> <span class="nf">_get_dummy_index</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">const_idx</span><span class="p">):</span>
     <span class="n">dummy_ind</span> <span class="o">=</span> <span class="n">_isdummy</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">dummy</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">dummy</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="c1"># adjust back for a constant because effects doesn&#39;t have one</span>
-    <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">dummy_ind</span><span class="p">[</span><span class="n">dummy_ind</span> <span class="o">&gt;</span> <span class="n">const_idx</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">dummy_ind</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># don&#39;t waste your time</span>
-        <span class="n">dummy</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">dummy_ind</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># this gets passed to stand err func</span>
+        <span class="n">dummy</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">dummy_ind</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># this gets passed to stand err func</span>
     <span class="k">return</span> <span class="n">dummy_ind</span><span class="p">,</span> <span class="n">dummy</span>
 
 <span class="k">def</span> <span class="nf">_iscount</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -254,17 +255,17 @@
 
 <span class="k">def</span> <span class="nf">_get_count_index</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">const_idx</span><span class="p">):</span>
     <span class="n">count_ind</span> <span class="o">=</span> <span class="n">_iscount</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="c1"># adjust back for a constant because effects doesn&#39;t have one</span>
-    <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">count_ind</span><span class="p">[</span><span class="n">count_ind</span> <span class="o">&gt;</span> <span class="n">const_idx</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">count_ind</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># don&#39;t waste your time</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">count_ind</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># for stand err func</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">count_ind</span> <span class="o">=</span> <span class="bp">None</span> <span class="c1"># for stand err func</span>
     <span class="k">return</span> <span class="n">count_ind</span><span class="p">,</span> <span class="n">count</span>
 
 <span class="k">def</span> <span class="nf">_get_margeff_exog</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">at</span><span class="p">,</span> <span class="n">atexog</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">atexog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># user supplied</span>
+    <span class="k">if</span> <span class="n">atexog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"># user supplied</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atexog</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="c1"># assumes values are singular or of len(exog)</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">atexog</span><span class="p">:</span>
@@ -453,24 +454,24 @@
 <span class="sd">    The outer Jacobians are computed via numerical differentiation if</span>
 <span class="sd">    derivative is a function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">derivative</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">import</span> <span class="n">approx_fprime_cs</span>
+    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">derivative</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="kn">import</span> <span class="n">approx_fprime_cs</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>  <span class="c1"># for Multinomial</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">approx_fprime_cs</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
                                             <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span><span class="n">method</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>  <span class="c1"># norm.cdf doesn&#39;t take complex values</span>
-            <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">import</span> <span class="n">approx_fprime</span>
+            <span class="kn">from</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="kn">import</span> <span class="n">approx_fprime</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">approx_fprime</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span>
                                             <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span><span class="n">method</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">at</span> <span class="o">==</span> <span class="s1">&#39;overall&#39;</span><span class="p">:</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jacobian_mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">jacobian_mat</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>  <span class="c1"># exog was 2d row vector</span>
-        <span class="k">if</span> <span class="n">dummy_ind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dummy_ind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">_margeff_cov_params_dummy</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">jacobian_mat</span><span class="p">,</span>
                                 <span class="n">params</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">dummy_ind</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">count_ind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">count_ind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">jacobian_mat</span> <span class="o">=</span> <span class="n">_margeff_cov_params_count</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">jacobian_mat</span><span class="p">,</span>
                                 <span class="n">params</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">count_ind</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -513,7 +514,7 @@
 <span class="sd">    This is just a sketch of what we may want out of a general margins class.</span>
 <span class="sd">    I (SS) need to look at details of other models.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Margins.__init__"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.__init__.html#statsmodels.discrete.discrete_margins.Margins.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">get_margeff</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Margins.__init__"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.__init__.html#statsmodels.discrete.discrete_margins.Margins.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">get_margeff</span><span class="p">,</span> <span class="n">derivative</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                        <span class="n">margeff_args</span><span class="o">=</span><span class="p">()):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="n">resettable_cache</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
@@ -546,10 +547,10 @@
 <div class="viewcode-block" id="Margins.pvalues"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.pvalues.html#statsmodels.discrete.discrete_margins.Margins.pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Margins.conf_int"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.conf_int.html#statsmodels.discrete.discrete_margins.Margins.conf_int">[docs]</a>    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="Margins.conf_int"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.conf_int.html#statsmodels.discrete.discrete_margins.Margins.conf_int">[docs]</a>    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Margins.summary"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.summary.html#statsmodels.discrete.discrete_margins.Margins.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="Margins.summary"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.Margins.summary.html#statsmodels.discrete.discrete_margins.Margins.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 
 <span class="c1">#class DiscreteMargins(Margins):</span>
@@ -580,7 +581,7 @@
         <span class="n">_check_at_is_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">margeff_options</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">margeff</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">margeff_se</span></div>
 
-<div class="viewcode-block" id="DiscreteMargins.summary_frame"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.summary_frame.html#statsmodels.discrete.discrete_margins.DiscreteMargins.summary_frame">[docs]</a>    <span class="k">def</span> <span class="nf">summary_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscreteMargins.summary_frame"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.summary_frame.html#statsmodels.discrete.discrete_margins.DiscreteMargins.summary_frame">[docs]</a>    <span class="k">def</span> <span class="nf">summary_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a DataFrame summarizing the marginal effects.</span>
 
@@ -596,7 +597,7 @@
 <span class="sd">            A DataFrame summarizing the marginal effects.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_check_at_is_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">margeff_options</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+        <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">_transform_names</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">margeff_options</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]],</span>
                                   <span class="s1">&#39;Std. Err.&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;Pr(&gt;|z|)&#39;</span><span class="p">,</span>
                                   <span class="s1">&#39;Conf. Int. Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Cont. Int. Hi.&#39;</span><span class="p">]</span>
@@ -612,7 +613,7 @@
         <span class="n">_check_at_is_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">margeff_options</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tvalues</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span></div>
 
-<div class="viewcode-block" id="DiscreteMargins.conf_int"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.conf_int.html#statsmodels.discrete.discrete_margins.DiscreteMargins.conf_int">[docs]</a>    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscreteMargins.conf_int"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.conf_int.html#statsmodels.discrete.discrete_margins.DiscreteMargins.conf_int">[docs]</a>    <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the confidence intervals of the marginal effects</span>
 
@@ -635,7 +636,7 @@
         <span class="n">upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">margeff</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">me_se</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">lzip</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DiscreteMargins.summary"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.summary.html#statsmodels.discrete.discrete_margins.DiscreteMargins.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscreteMargins.summary"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.summary.html#statsmodels.discrete.discrete_margins.DiscreteMargins.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mo">05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a summary table for marginal effects</span>
 
@@ -659,20 +660,20 @@
                 <span class="p">(</span><span class="s1">&#39;Method:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">method</span><span class="p">]),</span>
                 <span class="p">(</span><span class="s1">&#39;At:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">margeff_options</span><span class="p">[</span><span class="s1">&#39;at&#39;</span><span class="p">]]),]</span>
 
-        <span class="kn">from</span> <span class="nn">statsmodels.iolib.summary</span> <span class="k">import</span> <span class="p">(</span><span class="n">Summary</span><span class="p">,</span> <span class="n">summary_params</span><span class="p">,</span>
+        <span class="kn">from</span> <span class="nn">statsmodels.iolib.summary</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Summary</span><span class="p">,</span> <span class="n">summary_params</span><span class="p">,</span>
                                                 <span class="n">table_extend</span><span class="p">)</span>
         <span class="n">exog_names</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[:]</span> <span class="c1"># copy</span>
         <span class="n">smry</span> <span class="o">=</span> <span class="n">Summary</span><span class="p">()</span>
 
         <span class="c1"># sigh, we really need to hold on to this in _data...</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">const_idx</span> <span class="o">=</span> <span class="n">_get_const_index</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">const_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">exog_names</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">const_idx</span><span class="p">)</span>
 
         <span class="n">J</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">J</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">yname</span><span class="p">,</span> <span class="n">yname_list</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_get_endog_name</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span><span class="p">,</span>
-                                                <span class="kc">None</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                                <span class="bp">None</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">yname</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">endog_names</span>
             <span class="n">yname_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">yname</span><span class="p">]</span>
@@ -694,8 +695,8 @@
                 <span class="n">restup</span> <span class="o">=</span> <span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">margeff</span><span class="p">[:,</span><span class="n">eq</span><span class="p">],</span> <span class="n">margeff_se</span><span class="p">[:,</span><span class="n">eq</span><span class="p">],</span>
                           <span class="n">tvalues</span><span class="p">[:,</span><span class="n">eq</span><span class="p">],</span> <span class="n">pvalues</span><span class="p">[:,</span><span class="n">eq</span><span class="p">],</span> <span class="n">conf_int</span><span class="p">[:,:,</span><span class="n">eq</span><span class="p">])</span>
                 <span class="n">tble</span> <span class="o">=</span> <span class="n">summary_params</span><span class="p">(</span><span class="n">restup</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="n">yname_list</span><span class="p">[</span><span class="n">eq</span><span class="p">],</span>
-                              <span class="n">xname</span><span class="o">=</span><span class="n">exog_names</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">use_t</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                              <span class="n">skip_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                              <span class="n">xname</span><span class="o">=</span><span class="n">exog_names</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">use_t</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                              <span class="n">skip_header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
                 <span class="n">tble</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">yname_list</span><span class="p">[</span><span class="n">eq</span><span class="p">]</span>
                 <span class="c1"># overwrite coef with method name</span>
                 <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">_transform_names</span><span class="p">[</span><span class="n">method</span><span class="p">],</span> <span class="s1">&#39;std err&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
@@ -704,11 +705,11 @@
                 <span class="c1">#from IPython.core.debugger import Pdb; Pdb().set_trace()</span>
                 <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tble</span><span class="p">)</span>
 
-            <span class="n">table</span> <span class="o">=</span> <span class="n">table_extend</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">keep_headers</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">table_extend</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">keep_headers</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">restup</span> <span class="o">=</span> <span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">margeff</span><span class="p">,</span> <span class="n">margeff_se</span><span class="p">,</span> <span class="n">tvalues</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">,</span> <span class="n">conf_int</span><span class="p">)</span>
             <span class="n">table</span> <span class="o">=</span> <span class="n">summary_params</span><span class="p">(</span><span class="n">restup</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="n">yname</span><span class="p">,</span> <span class="n">xname</span><span class="o">=</span><span class="n">exog_names</span><span class="p">,</span>
-                    <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">use_t</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">use_t</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">_transform_names</span><span class="p">[</span><span class="n">method</span><span class="p">],</span> <span class="s1">&#39;std err&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;P&gt;|z|&#39;</span><span class="p">,</span> <span class="s1">&#39;[</span><span class="si">%3.1f%%</span><span class="s1"> Conf. Int.]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">100</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="mi">100</span><span class="p">)]</span>
             <span class="n">table</span><span class="o">.</span><span class="n">insert_header_row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
@@ -716,8 +717,8 @@
         <span class="n">smry</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">smry</span></div>
 
-<div class="viewcode-block" id="DiscreteMargins.get_margeff"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.get_margeff.html#statsmodels.discrete.discrete_margins.DiscreteMargins.get_margeff">[docs]</a>    <span class="k">def</span> <span class="nf">get_margeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s1">&#39;overall&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;dydx&#39;</span><span class="p">,</span> <span class="n">atexog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                          <span class="n">dummy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscreteMargins.get_margeff"><a class="viewcode-back" href="../../../generated/generated/statsmodels.discrete.discrete_margins.DiscreteMargins.get_margeff.html#statsmodels.discrete.discrete_margins.DiscreteMargins.get_margeff">[docs]</a>    <span class="k">def</span> <span class="nf">get_margeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s1">&#39;overall&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;dydx&#39;</span><span class="p">,</span> <span class="n">atexog</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                          <span class="n">dummy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get marginal effects of the fitted model.</span>
 
 <span class="sd">        Parameters</span>
@@ -793,13 +794,13 @@
             <span class="n">_check_discrete_args</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
             <span class="n">dummy_idx</span><span class="p">,</span> <span class="n">dummy</span> <span class="o">=</span> <span class="n">_get_dummy_index</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">const_idx</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">dummy_idx</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">dummy_idx</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="k">if</span> <span class="n">count</span><span class="p">:</span>
             <span class="n">_check_discrete_args</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
             <span class="n">count_idx</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">_get_count_index</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">const_idx</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">count_idx</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">count_idx</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="c1"># get the exogenous variables</span>
         <span class="n">exog</span> <span class="o">=</span> <span class="n">_get_margeff_exog</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">at</span><span class="p">,</span> <span class="n">atexog</span><span class="p">,</span> <span class="n">effects_idx</span><span class="p">)</span>
@@ -882,6 +883,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

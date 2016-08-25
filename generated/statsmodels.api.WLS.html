@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1.2. statsmodels.api.WLS &mdash; Sphinx Skeleton v1</title>
+  <title>1.2. statsmodels.api.WLS &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="../index.html"/>
+    <link rel="top" title="Sphinx Skeleton" href="../index.html"/>
         <link rel="up" title="1. Demo of autodoc’ing classes" href="../demo_autoclass.html"/>
         <link rel="next" title="1.2.1.1. statsmodels.api.WLS.__init__" href="statsmodels.api.WLS.__init__.html"/>
         <link rel="prev" title="1.1. statsmodels.api.GLS" href="statsmodels.api.GLS.html"/> 
@@ -89,7 +89,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../demo_autoclass.html">1. Demo of autodoc&#8217;ing classes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="statsmodels.api.GLS.html">1.1. statsmodels.api.GLS</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. statsmodels.api.WLS</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">1.2. statsmodels.api.WLS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#methods">1.2.1. Methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="statsmodels.api.WLS.__init__.html">1.2.1.1. statsmodels.api.WLS.__init__</a></li>
 <li class="toctree-l4"><a class="reference internal" href="statsmodels.api.WLS.fit.html">1.2.1.2. statsmodels.api.WLS.fit</a></li>
@@ -117,6 +117,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../demo_automodule.html">2. Automodule demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -229,8 +230,8 @@ False, a constant is not checked for and k_constant is set to 0.</p>
 statistics such as fvalue and mse_model might not be correct, as the
 package does not yet support no-constant regression.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -240,9 +241,9 @@ package does not yet support no-constant regression.</p>
 <span class="go">array([ 2.91666667,  0.0952381 ])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="o">.</span><span class="n">tvalues</span>
 <span class="go">array([ 2.0652652 ,  0.35684428])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">t_test</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">t_test</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
 <span class="go">&lt;T test: effect=array([ 2.91666667]), sd=array([[ 1.41224801]]), t=array([[ 2.0652652]]), p=array([[ 0.04690139]]), df_denom=5&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">f_test</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">f_test</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 <span class="go">&lt;F test: F=array([[ 0.12733784]]), p=[[ 0.73577409]], df_denom=5, df_num=1&gt;</span>
 </pre></div>
 </div>
@@ -382,6 +383,7 @@ package does not yet support no-constant regression.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

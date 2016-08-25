@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.2.2.3. statsmodels.distributions.StepFunction &mdash; Sphinx Skeleton v1</title>
+  <title>2.2.2.3. statsmodels.distributions.StepFunction &mdash; Sphinx Skeleton</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="Sphinx Skeleton v1" href="../../index.html"/>
+    <link rel="top" title="Sphinx Skeleton" href="../../index.html"/>
         <link rel="up" title="2.2. statsmodels.distributions" href="../statsmodels.distributions.html"/>
         <link rel="next" title="2.2.2.3.1.1. statsmodels.distributions.StepFunction.__call__" href="statsmodels.distributions.StepFunction.__call__.html"/>
         <link rel="prev" title="2.2.2.2.2.1. statsmodels.distributions.ExpandedNormal.random_state" href="statsmodels.distributions.ExpandedNormal.random_state.html"/> 
@@ -95,13 +95,14 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../statsmodels.distributions.html#classes">2.2.2. Classes</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="statsmodels.distributions.ECDF.html">2.2.2.1. statsmodels.distributions.ECDF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="statsmodels.distributions.ExpandedNormal.html">2.2.2.2. statsmodels.distributions.ExpandedNormal</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">2.2.2.3. statsmodels.distributions.StepFunction</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">2.2.2.3. statsmodels.distributions.StepFunction</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../demo_copybutton.html">3. Copy-button Demo</a></li>
 </ul>
 
             
@@ -198,23 +199,23 @@ steps. &#8216;right&#8217; correspond to [a, b) intervals and &#8216;left&#8217;
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="k">import</span> <span class="n">StepFunction</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="kn">import</span> <span class="n">StepFunction</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">StepFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">3.2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">3.2</span><span class="p">))</span>
 <span class="go">3.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">([[</span><span class="mf">3.2</span><span class="p">,</span><span class="mf">4.5</span><span class="p">],[</span><span class="mi">24</span><span class="p">,</span><span class="o">-</span><span class="mf">3.1</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">([[</span><span class="mf">3.2</span><span class="p">,</span><span class="mf">4.5</span><span class="p">],[</span><span class="mi">24</span><span class="p">,</span><span class="o">-</span><span class="mf">3.1</span><span class="p">]]))</span>
 <span class="go">[[  3.   4.]</span>
 <span class="go"> [ 19.   0.]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="n">StepFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
 <span class="go">2.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f2</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f2</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
 <span class="go">3.0</span>
 </pre></div>
 </div>
@@ -307,6 +308,7 @@ steps. &#8216;right&#8217; correspond to [a, b) intervals and &#8216;left&#8217;
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   

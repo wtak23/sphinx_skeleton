@@ -1,0 +1,11 @@
+statsmodels.discrete.discrete_margins.range
+===========================================
+.. currentmodule:: statsmodels.discrete.discrete_margins
+.. autoclass:: range
+   :undoc-members:
+
+
+
+
+
+
