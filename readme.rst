@@ -2,7 +2,7 @@ Skeleton for creating documentations using Sphinx.
 
 Building this source-code yields html page like this:
 
-- https://wtak23.github.io/sphinx_skeleton_published/
+- https://wtak23.github.io/sphinx_skeleton
 
 ###########
 generate.py
