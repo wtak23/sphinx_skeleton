@@ -11,4 +11,3 @@ rm -r ./source/generated*
 # cp -r ./source/_templates ./source/generated/
 # cp -r ./source/_templates ./source/generated/generated/
 make html
-# rsync -r build/html/ bs4doc/
